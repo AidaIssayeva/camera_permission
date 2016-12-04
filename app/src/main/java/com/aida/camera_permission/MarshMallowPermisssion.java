@@ -17,6 +17,7 @@ public class MarshMallowPermisssion {
     public static final int EXTERNAL_STORAGE_PERMISSION_REQUEST_CODE = 2;
     public static final int CAMERA_PERMISSION_REQUEST_CODE = 3;
     public static final int LOCATION_REQUEST_CODE = 4;
+    public static final int INTERNET_REQUEST_CODE = 5;
     Activity activity;
 
     public MarshMallowPermisssion(Activity activity) {
@@ -55,6 +56,21 @@ public class MarshMallowPermisssion {
             return true;
         } else {
             return false;
+        }
+    }
+    public boolean checkPermissionForInternet(){
+        int result = ContextCompat.checkSelfPermission(activity, Manifest.permission.INTERNET);
+        if (result == PackageManager.PERMISSION_GRANTED){
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public void requestPermissionForInternet(){
+        if (ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.INTERNET)){
+            Toast.makeText(activity, "Location permission needed. Please allow in App Settings for additional functionality.", Toast.LENGTH_LONG).show();
+        } else {
+            ActivityCompat.requestPermissions(activity,new String[]{Manifest.permission.INTERNET},INTERNET_REQUEST_CODE);
         }
     }
     public void requestPermissionForLocation(){
